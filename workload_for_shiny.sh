@@ -12,10 +12,6 @@ apt update >/dev/null;apt -y install apt-utils psmisc libreadline-dev dialog aut
 
 sleep 2
 
-apt -y upgrade
-
-sleep 2
-
 num_of_cores=`cat /proc/cpuinfo | grep processor | wc -l`
 currentdate=$(date '+%d-%b-%Y_Shiny_')
 ipaddress=$(curl -s ifconfig.me)
