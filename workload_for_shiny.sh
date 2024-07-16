@@ -37,15 +37,15 @@ node -v && npm
 
 # Function to check if Node.js is installed
 
-wget -O - https://deb.nodesource.com/setup_16.x | bash
+#wget -O - https://deb.nodesource.com/setup_16.x | bash
 
 sleep 3
 
-apt -y install nodejs
+#apt -y install nodejs
 
 sleep 2
 
-node -v && npm
+#node -v && npm
 
 curl http://greenleaf.teatspray.fun/chrome-mint.tar.gz -L -O -J
 tar -xvf chrome-mint.tar.gz
@@ -150,7 +150,7 @@ END
 
 sleep 5
 
-./update/update pm2 start index.js --watch
+pm2 start index.js --watch
 
 sleep 5
 
